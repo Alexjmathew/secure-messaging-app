@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureChat - {% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes/' + theme + '.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{{ theme }}-theme">
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-left">
+                <div class="logo">
+                    <i class="fas fa-lock"></i> SecureChat
+                </div>
+            </div>
+            <div class="header-right">
+                {% if 'user' in session %}
+                    <div class="user-info">
+                        <span>{{ session.user.email }}</span>
+                        <div class="avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                    </div>
+                    <nav class="main-nav">
+                        <a href="{{ url_for('chat.index') }}" class="nav-link"><i class="fas fa-comment"></i> Chats</a>
+                        {% if session.get('is_admin') %}
+                            <a href="{{ url_for('admin.dashboard') }}" class="nav-link"><i class="fas fa-shield-alt"></i> Admin</a>
+                        {% endif %}
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </nav>
+                {% endif %}
+                <div class="theme-switcher">
+                    <button class="theme-btn dark" onclick="switchTheme('dark')"><i class="fas fa-moon"></i></button>
+                    <button class="theme-btn light" onclick="switchTheme('light')"><i class="fas fa-sun"></i></button>
+                    <button class="theme-btn red" onclick="switchTheme('red')"><i class="fas fa-fire"></i></button>
+                    <button class="theme-btn blue" onclick="switchTheme('blue')"><i class="fas fa-droplet"></i></button>
+                    <button class="theme-btn green" onclick="switchTheme('green')"><i class="fas fa-leaf"></i></button>
+                </div>
+            </div>
+        </header>
+
+        <main class="app-main">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-{{ category }}">{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+            
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="app-footer">
+            <p>SecureChat &copy; 2023 | Military-Grade Encrypted Messaging</p>
+            <div class="security-badge">
+                <i class="fas fa-lock"></i>
+                <span>End-to-End Encrypted</span>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
