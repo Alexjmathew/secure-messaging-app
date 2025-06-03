@@ -1,0 +1,39 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2980b9;
+    --background-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #e0e0e0;
+    --text-light: #b0b0b0;
+    --border-color: #333;
+}
+
+body.dark-theme {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.auth-card, .chat-container, .admin-container {
+    background-color: var(--card-bg);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.form-group input {
+    background-color: #2a2a2a;
+    color: var(--text-color);
+    border-color: var(--border-color);
+}
+
+.contact-item, .user-item {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.message.sent {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.message.received {
+    background-color: #2a2a2a;
+    color: var(--text-color);
+}
