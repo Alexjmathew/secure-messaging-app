@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <h1 class="admin-title"><i class="fas fa-shield-alt"></i> Admin Dashboard</h1>
+    
+    <div class="admin-stats">
+        <div class="stat-card">
+            <div class="stat-icon users">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="totalUsers">Loading...</h3>
+                <p>Total Users</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon messages">
+                <i class="fas fa-comments"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="totalMessages">Loading...</h3>
+                <p>Messages Today</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon banned">
+                <i class="fas fa-ban"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="bannedUsers">Loading...</h3>
+                <p>Banned Users</p>
+            </div>
+        </div>
+        
+        <div class="stat-card">
+            <div class="stat-icon groups">
+                <i class="fas fa-user-friends"></i>
+            </div>
+            <div class="stat-info">
+                <h3 id="totalGroups">Loading...</h3>
+                <p>Active Groups</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="admin-actions">
+        <a href="{{ url_for('admin.manage_users') }}" class="action-card">
+            <i class="fas fa-user-cog"></i>
+            <span>Manage Users</span>
+        </a>
+        <a href="{{ url_for('admin.view_messages') }}" class="action-card">
+            <i class="fas fa-comment-dots"></i>
+            <span>View Messages</span>
+        </a>
+        <a href="#" class="action-card" id="systemSettingsBtn">
+            <i class="fas fa-cog"></i>
+            <span>System Settings</span>
+        </a>
+        <a href="#" class="action-card" id="securityLogsBtn">
+            <i class="fas fa-clipboard-list"></i>
+            <span>Security Logs</span>
+        </a>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
+{% endblock %}
