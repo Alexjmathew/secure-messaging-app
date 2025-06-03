@@ -1,0 +1,49 @@
+<div class="active-chat">
+    <div class="chat-header">
+        <div class="chat-info">
+            <div class="avatar">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="chat-details">
+                <h3 id="chatWithName">Loading...</h3>
+                <p class="status" id="chatStatus">Online</p>
+            </div>
+        </div>
+        <div class="chat-actions">
+            <button class="action-btn" id="voiceCallBtn" title="Voice Call">
+                <i class="fas fa-phone"></i>
+            </button>
+            <button class="action-btn" id="videoCallBtn" title="Video Call">
+                <i class="fas fa-video"></i>
+            </button>
+            <button class="action-btn" id="moreOptionsBtn" title="More Options">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="messages-container" id="messagesContainer">
+        <!-- Messages will be loaded here -->
+        <div class="loading-messages">
+            <i class="fas fa-spinner fa-spin"></i> Loading messages...
+        </div>
+    </div>
+    
+    <div class="message-input-container">
+        <div class="input-actions">
+            <button class="input-btn" id="attachFileBtn" title="Attach File">
+                <i class="fas fa-paperclip"></i>
+            </button>
+            <button class="input-btn" id="sendImageBtn" title="Send Image">
+                <i class="fas fa-image"></i>
+            </button>
+            <button class="input-btn" id="emojiBtn" title="Emoji">
+                <i class="fas fa-smile"></i>
+            </button>
+        </div>
+        <textarea id="messageInput" placeholder="Type your encrypted message..."></textarea>
+        <button class="send-btn" id="sendMessageBtn">
+            <i class="fas fa-paper-plane"></i>
+        </button>
+    </div>
+</div>
