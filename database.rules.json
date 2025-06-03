@@ -1,0 +1,58 @@
+{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && auth.uid == $uid",
+        ".validate": "newData.hasChildren(['email', 'created_at'])",
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[^@]+@[^@]+\\.[^@]+$/)"
+        },
+        "is_admin": {
+          ".validate": "newData.isBoolean()"
+        },
+        "is_banned": {
+          ".validate": "newData.isBoolean()"
+        }
+      },
+      ".indexOn": ["email"]
+    },
+    "messages": {
+      "$messageId": {
+        ".read": "auth != null && (data.child('sender').val() == auth.uid || data.child('recipient').val() == auth.uid)",
+        ".write": "auth != null && newData.child('sender').val() == auth.uid",
+        ".validate": "newData.hasChildren(['sender', 'recipient', 'message', 'timestamp'])",
+        "sender": {
+          ".validate": "newData.isString() && newData.val() == auth.uid"
+        },
+        "recipient": {
+          ".validate": "newData.isString()"
+        },
+        "message": {
+          ".validate": "newData.isString()"
+        },
+        "timestamp": {
+          ".validate": "newData.isNumber()"
+        }
+      },
+      ".indexOn": ["sender", "recipient", "timestamp"]
+    },
+    "groups": {
+      "$groupId": {
+        ".read": "auth != null && (data.child('members').hasChild(auth.uid) || root.child('users').child(auth.uid).child('is_admin').val() == true)",
+        ".write": "auth != null && (data.child('created_by').val() == auth.uid || root.child('users').child(auth.uid).child('is_admin').val() == true)",
+        ".validate": "newData.hasChildren(['name', 'created_by', 'members'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "created_by": {
+          ".validate": "newData.isString()"
+        },
+        "members": {
+          ".validate": "newData.hasChildren([auth.uid])"
+        }
+      },
+      ".indexOn": ["created_by", "members"]
+    }
+  }
+}
