@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Secure Chat{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="chat-container">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-comments"></i> Conversations</h3>
+            <button class="new-chat-btn" id="newChatBtn">
+                <i class="fas fa-plus"></i> New Chat
+            </button>
+        </div>
+        
+        <div class="search-box">
+            <input type="text" placeholder="Search contacts..." id="contactSearch">
+            <i class="fas fa-search"></i>
+        </div>
+        
+        <div class="contacts-list" id="contactsList">
+            <!-- Contacts will be loaded here via JavaScript -->
+            <div class="loading-contacts">
+                <i class="fas fa-spinner fa-spin"></i> Loading contacts...
+            </div>
+        </div>
+    </div>
+    
+    <div class="chat-area" id="chatArea">
+        <div class="empty-chat">
+            <div class="empty-icon">
+                <i class="fas fa-comment-slash"></i>
+            </div>
+            <h3>Select a chat to start messaging</h3>
+            <p>Your conversations are end-to-end encrypted</p>
+            <button class="new-chat-btn" id="newChatBtn2">
+                <i class="fas fa-plus"></i> Start New Chat
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- New Chat Modal -->
+<div class="modal" id="newChatModal">
+    <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h3><i class="fas fa-user-plus"></i> New Conversation</h3>
+        <div class="modal-body">
+            <div class="tab-container">
+                <button class="tab-btn active" data-tab="users">Users</button>
+                <button class="tab-btn" data-tab="groups">Groups</button>
+            </div>
+            
+            <div class="tab-content active" id="usersTab">
+                <div class="search-box">
+                    <input type="text" placeholder="Search users..." id="userSearch">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="user-list" id="userList">
+                    <!-- Users will be loaded here -->
+                </div>
+            </div>
+            
+            <div class="tab-content" id="groupsTab">
+                <button class="create-group-btn" id="createGroupBtn">
+                    <i class="fas fa-plus"></i> Create New Group
+                </button>
+                <div class="group-list" id="groupList">
+                    <!-- Groups will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="{{ url_for('static', filename='js/encryption.js') }}"></script>
+{% endblock %}
