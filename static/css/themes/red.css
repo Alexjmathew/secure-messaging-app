@@ -1,0 +1,23 @@
+:root {
+    --primary-color: #e74c3c;
+    --secondary-color: #c0392b;
+}
+
+body.red-theme .app-header, 
+body.red-theme .app-footer {
+    background-color: var(--primary-color);
+}
+
+body.red-theme .auth-btn,
+body.red-theme .send-btn {
+    background-color: var(--primary-color);
+}
+
+body.red-theme .auth-btn:hover,
+body.red-theme .send-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+body.red-theme .message.sent {
+    background-color: var(--primary-color);
+}
